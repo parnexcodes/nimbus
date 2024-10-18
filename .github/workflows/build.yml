@@ -41,22 +41,8 @@ jobs:
           title: Release ${{ github.run_number }}
           tag: v${{ github.run_number }}
 
-      - name: Upload Linux Release Asset
-        uses: actions/upload-release-asset@v1
+      - name: Upload Release Assets
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./builds/nimbus-linux
-          asset_name: nimbus-linux
-          asset_content_type: application/octet-stream
-
-      - name: Upload Windows Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./builds/nimbus-windows.exe
-          asset_name: nimbus-windows.exe
-          asset_content_type: application/octet-stream
+        run: |
+          gh release upload v${{ github.run_number }} ./builds/nimbus-linux ./builds/nimbus-windows.exe
