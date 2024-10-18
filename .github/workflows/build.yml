@@ -32,13 +32,13 @@ jobs:
           ./build.sh
 
       - name: Upload Linux build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: nimbus-linux
           path: builds/nimbus-linux
 
       - name: Upload Windows build
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: nimbus-windows
           path: builds/nimbus-windows.exe
