@@ -33,8 +33,16 @@ async fn main() {
     // Parse command-line arguments
     let args = Args::parse();
 
-    info!("Starting file/folder upload tool");
+    info!("Starting nimbus");
 
+    println!("{}", r#"
+ _   _ _           _               
+| \ | (_)         | |              
+|  \| |_ _ __ ___ | |__  _   _ ___ 
+| . ` | | '_ ` _ \| '_ \| | | / __|
+| |\  | | | | | | | |_) | |_| \__ \
+\_| \_/_|_| |_| |_|_.__/ \__,_|___/
+    "#.cyan());
     println!("{}", "File/Folder Upload Tool".green().bold());
     println!("Path: {}", args.path);
     println!("Sites: {}", args.sites.join(", "));
