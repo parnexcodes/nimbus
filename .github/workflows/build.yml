@@ -1,0 +1,44 @@
+name: Build Nimbus
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+
+      - name: Install MinGW-w64
+        run: sudo apt-get update && sudo apt-get install -y mingw-w64
+
+      - name: Add Windows GNU target
+        run: rustup target add x86_64-pc-windows-gnu
+
+      - name: Build Nimbus
+        run: |
+          chmod +x build.sh
+          ./build.sh
+
+      - name: Upload Linux build
+        uses: actions/upload-artifact@v2
+        with:
+          name: nimbus-linux
+          path: builds/nimbus-linux
+
+      - name: Upload Windows build
+        uses: actions/upload-artifact@v2
+        with:
+          name: nimbus-windows
+          path: builds/nimbus-windows.exe
